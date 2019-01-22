@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="left_padding_50">
+    <h1>User: {{ user.username }}</h1>
+
+        <p class="text_center">Average score: {{ avg_score_user }}</p>
+        <p class="text_center", id="user_stats">{{ number_user_reviews }} ratings</p>
+
+    {% for user_review in user_reviews %}
+    <p><b><a href="{{ url_for('get_book_reviews', isbn=user_review.isbn) }}">{{ user_review.title }}</a></b> was rated: <i>{{ user_review.score }} / 5</i></p>
+    <p><i>{{ user_review.body }}</i></p>
+
+    {% else %}
+    <p>This user hasn't written a review yet.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

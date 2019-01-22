@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>Success</h1>
+
+<div class="text_center">
+
+    {{ message }}
+
+    <p><a href="{{ url_for('login') }}"> Login here</a> with your credentials.</p>
+
+</div>
+{% endblock %}

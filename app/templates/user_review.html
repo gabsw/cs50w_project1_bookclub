@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>{{ book.title }}</h1>
+
+    <div class="text_center">
+        <p><b>{{ review.username }}</b> rated it: <i>{{ review.score }} &frasl; 5</i></p>
+        <p>{{ review.body }}</p>
+        <p><a href="{{ url_for('get_book_reviews', isbn=book.isbn) }}"> Click here</a> to go back to the book's page.</p>
+    </div>
+
+
+{% endblock %}

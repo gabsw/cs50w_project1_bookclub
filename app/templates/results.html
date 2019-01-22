@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="left_padding_50">
+    <h2 class="heading_left">All books related to your search:</h2>
+
+    <ul>
+        {% for book in books %}
+            <li>
+                <a href="{{ url_for('get_book_reviews', isbn=book.isbn) }}">
+                    {{ book.title }} by {{ book.author }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

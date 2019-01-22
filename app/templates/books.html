@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="row">
+  <div class="column_left">
+        <h1 class="heading_left">Book Details</h1>
+
+        <ul>
+            <li>Title: {{ book.title }}</li>
+            <li>Author: {{ book.author }}</li>
+            <li>Publication Year: {{ book.publication_year}}</li>
+            <li>ISBN Number: {{ book.isbn}}</li>
+
+        </ul>
+
+        <h3 class="heading_left">Ratings from Goodreads</h3>
+
+        <ul>
+            <li>Average score: {{ avg_goodreads_score }}</li>
+            <li>{{ count_goodreads_reviews }} ratings</li>
+        </ul>
+
+        <a class="text_center" href="https://www.goodreads.com/book/isbn_to_id/{{ book.isbn }}">Visit Goodreads.</a>
+
+
+        <h3 class="heading_left">Ratings from BookClub</h3>
+
+        <ul>
+            <li>Average score: {{ avg_score }}</li>
+            <li>{{ number_reviews }} ratings</li>
+        </ul>
+    </div>
+
+    <div class="column_right">
+        <h1 class="heading_left">BookClub Reviews</h1>
+        {% if user_has_review %}
+        <p>You have already reviewed this book!</p>
+        <p><a href="{{ url_for('get_user_book_review', user_id=current_user.user_id, isbn=book.isbn) }}">Click here
+            to read your review.</a></p>
+
+        {% else %}
+        <form action="" method="post" autocomplete="off">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.body.label }}<br>
+                {{ form.body(cols=50, rows=5) }}<br>
+                {% for error in form.body.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.score.label }}<br>
+                {{ form.score(cols=32) }}<br>
+                {% for error in form.score.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>{{ form.submit() }}</p>
+        </form>
+        {% endif %}
+
+        {% for review in reviews %}
+        <div>
+            <p><b><a href="{{ url_for('user', username=review.username) }}">{{ review.username }}</a></b> rated it: <i>{{ review.score }} / 5</i></p>
+            <p>{{ review.body }}</p>
+        </div>
+        {% else %}
+        <div>No reviews have been written for this book so far.</div>
+        {% endfor %}
+
+    </div>
+</div>
+
+
+{% endblock %}

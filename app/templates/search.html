@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h4>Hi, {{ current_user.username }}!</h4>
+
+<div class="text_center">
+<p>Let your reading list grow by browsing for new recommendations and check out what other people think about your favorite books.</p>
+
+
+    <form action="" method="post" autocomplete="off">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.search.label }}<br>
+            {{ form.search(size=32) }}<br>
+            {% for error in form.search.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+</div>
+{% endblock %}
+

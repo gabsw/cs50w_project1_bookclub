@@ -1,0 +1,29 @@
+{% extends 'bootstrap/base.html' %}
+    {% block styles %}
+    {{super()}}
+    <link rel="stylesheet"
+          href="{{url_for('static', filename='default_style.css')}}">
+    {% endblock %}
+
+    {% block title %}
+      BookClub - {{ title }}
+    {% endblock %}
+
+    {% block navbar %}
+        <div class="left_padding_10">
+            Navigation:
+            <a href="{{ url_for('index') }}">Home</a>
+            {% if current_user.is_anonymous %}
+            <a href="{{ url_for('login') }}">Login</a>
+            {% else %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+            <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
+            {% endif %}
+            <a href="{{ url_for('search') }}">Search</a>
+        </div>
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+
+
+
